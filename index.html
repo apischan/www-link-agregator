@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <head>
+        <title>
+            Link agregator
+        </title>
+        <link href="css/style.css" rel="stylesheet" /> <!-- Design -->
+
+        <script src="angular/angular.js"></script> <!-- Angular files -->
+        <script src="angular/controller.js"></script> <!-- Angular files -->
+
+        <script src="js/model/model.js"></script> <!-- JS files -->
+    </head>
+    <body>
+        <div ng-controller="agr_test">
+            Enter link: <input type="text" ng-model="name" value="https://www.google.com.ua/"/>
+            <hr/>
+            Your link: <a href="{{name}}" target="_blank">{{name}}</a>
+        </div>
+    </body>
+</html>
