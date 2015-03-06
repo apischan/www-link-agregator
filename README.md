@@ -1,2 +1,2 @@
 # www-link-agregator
-Node.js + AngularJS web link aggregator
+Node.js + AngularJS web link aggregator :)
