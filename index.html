@@ -9,14 +9,79 @@
 
         <script src="angular/angular.js"></script> <!-- Angular files -->
         <script src="angular/controller.js"></script> <!-- Angular files -->
-
+		
+		<script src="js/jquery-2.1.3.min.js"></script> <!-- Angular files -->
+		
+		<script src="js/global.js"></script> <!-- JS files -->
         <script src="js/model/model.js"></script> <!-- JS files -->
     </head>
     <body>
-        <div ng-controller="agr_test">
-            Enter link: <input type="text" ng-model="name" value="https://www.google.com.ua/"/>
-            <hr/>
-            Your link: <a href="{{name}}" target="_blank">{{name}}</a>
+        <div class="left-bar" ng-controller="agr_test">
+			<div class="left-bar-header">
+				<h1>Link agregator</h1>
+			</div>
+			<h2>Please, check the category*:</h2>
+			<select class="links-select">
+			  <option>Sport</option>
+			  <option>Hi-Tech</option>
+			  <option>Movies</option>
+			</select>
+			
+			<h2>And enter link*:</h2>
+			<input class="links-input" type="text" ng-model="name" value=""/>
+				<br/>
+			<div class="links-link">
+				<strong>></strong> <a href="{{name}}" target="_blank">{{name}}</a>
+			</div>
+			
         </div>
+			<div class="clearfix"></div>
+		<div class="middle">
+			<div class="tabs" id="tab-one">Actual</div>
+			<div class="tabs" id="tab-two">Completed</div>
+				<div class="clearfix"></div>
+			<div class="tab_actual" id="tab_act">
+				<div class="item">
+					<div class="item-title">
+						Google
+					</div>
+					<div class="item-image">
+						<img src="img/temp/google.jpg" title="Google" />
+					</div>
+					<div class="item-link">
+						https://www.google.com/
+					</div>
+				</div>
+				
+				<div class="item">
+					<div class="item-title">
+						UEFA
+					</div>
+					<div class="item-image">
+						<img src="img/temp/uefa.jpg" title="UEFA" />
+					</div>
+					<div class="item-link">
+						http://www.uefa.com/
+					</div>
+				</div>
+				
+				<div class="item">
+					<div class="item-title">
+						3DNews
+					</div>
+					<div class="item-image">
+						<img src="img/temp/3dnews.jpg" title="3DNews" />
+					</div>
+					<div class="item-link">
+						http://www.3dnews.ru/
+					</div>
+				</div>
+				
+			</div>
+			<div class="tab-completed" id="tab_com">
+				Your history is clear =]
+			</div>
+			
+		</div>
     </body>
 </html>
