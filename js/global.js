@@ -26,48 +26,36 @@ $(document).ready(function() {
 
 });
 
-var addItem = function(link, title, imgLication) {
+var divItemTemplate = '\
+    <div class="item">\
+        <div class="item-title">#{title}</div>\
+        <div class="item-image">\
+            <img src="#{imgUrl}" title="#{title}" />\
+        </div>\
+        <div class="item-link">#{itemLink}</div>\
+    </div>';
+
+var addItem = function(link, title, imgUrl) {
     var actualTab = document.getElementById('tab_act');
 
-    var divItem = document.createElement('div');
-    var divTitle = document.createElement('div');
-    var divImage = document.createElement('div');
-    var divLink = document.createElement('div');
+    actualTab.innerHTML = divItemTemplate.replace(/#{title}/g, title)
+                                          .replace(/#{imgUrl}/g, imgUrl)
+                                          .replace(/#{itemLink}/g, link) + actualTab.innerHTML;
 
-    var imageElem = document.createElement('img');
-
-    divItem.setAttribute('class', 'item');
-    divTitle.setAttribute('class', 'item-title');
-    divImage.setAttribute('class', 'item-image');
-    divLink.setAttribute('class', 'item-link');
-
-    imageElem.setAttribute('src', imgLication);
-    imageElem.setAttribute('title', title);
-
-    divImage.appendChild(imageElem);
-
-    divTitle.appendChild(document.createTextNode(title));
-    divLink.appendChild(document.createTextNode(link));
-
-    divItem.appendChild(divTitle);
-    divItem.appendChild(divImage);
-    divItem.appendChild(divLink);
-    
-    shiftItem(actualTab, divItem);
+    shiftItem(actualTab);
 };
 
-function shiftItem(actualTab, divItem) {
+function shiftItem(actualTab) {
     var divs = [].slice.call(actualTab.getElementsByTagName('div'));
     divs = divs.filter(function(elem) {
-        return elem.className == 'item';
+        return elem.className === 'item';
     });
-    if (divs.length === 11) {
-        var shifted = divs.shift();
+    if (divs.length > 11) {
+        var shifted = divs.pop();
         actualTab.removeChild(shifted);
     }
-    actualTab.insertBefore(divItem, divs[0]);
 };
 
-function validateWebLink(link) {
-    '^(?:ftp|http|https):\/\/(?:[\w\.\-\+]+:{0,1}[\w\.\-\+]*@)?(?:[a-z0-9\-\.]+)(?::[0-9]+)?(?:\/|\/(?:[\w#!:\.\?\+=&%@!\-\/\(\)]+)|\?(?:[\w#!:\.\?\+=&%@!\-\/\(\)]+))?$'
-};
+//function validateWebLink(link) {
+//    '^(?:ftp|http|https):\/\/(?:[\w\.\-\+]+:{0,1}[\w\.\-\+]*@)?(?:[a-z0-9\-\.]+)(?::[0-9]+)?(?:\/|\/(?:[\w#!:\.\?\+=&%@!\-\/\(\)]+)|\?(?:[\w#!:\.\?\+=&%@!\-\/\(\)]+))?$'
+//};
