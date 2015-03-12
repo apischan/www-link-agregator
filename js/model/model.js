@@ -17,3 +17,4 @@ var Article = function(topic, text) {
     this.topic = topic;
     this.text = text;
 };
+//LOL
