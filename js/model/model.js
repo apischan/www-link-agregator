@@ -1,6 +1,3 @@
-/**
- * New node file
- */
 var Category = function(name) {
     this.name = name;
 };
