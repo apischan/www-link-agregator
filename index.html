@@ -32,9 +32,9 @@
         </select>
 
         <h2>And enter link*:</h2>
-        <input id='link' class="links-input" type="text" value="" />
-        <input id='title' class="links-input" type="text" value="" />
-        <input id='imgUrl' class="links-input" type="text" value="" />
+        <input id='linkInput' class="links-input" type="text" value="" />
+        <input id='titleInput' class="links-input" type="text" value="" />
+        <input id='imgUrlInput' class="links-input" type="text" value="" />
         <br />
         <div class="links-link">
             <strong>></strong> <a href="{{name}}" target="_blank">{{name}}</a>
@@ -50,7 +50,10 @@
         <div class="clearfix"></div>
         <div class="tab_actual" id="tab_act">
             <div class="item">
-                <div class="item-title">Google</div>
+                <div class="item-title">
+                    Google
+                    <input type="button" value="edit" onclick="edit();" /> <!-- replace this please -->
+                </div>
                 <div class="item-image">
                     <img src="img/temp/google.jpg" title="Google" />
                 </div>
@@ -58,7 +61,10 @@
             </div>
 
             <div class="item">
-                <div class="item-title">UEFA</div>
+                <div class="item-title">
+                    UEFA
+                    <input type="button" value="edit" onclick="edit();" /> <!-- replace this please -->
+                </div>
                 <div class="item-image">
                     <img src="img/temp/uefa.jpg" title="UEFA" />
                 </div>
@@ -66,7 +72,10 @@
             </div>
 
             <div class="item">
-                <div class="item-title">3DNews</div>
+                <div class="item-title">
+                    3DNews
+                    <input type="button" value="edit" onclick="edit();" /> <!-- replace this please -->
+                </div>
                 <div class="item-image">
                     <img src="img/temp/3dnews.jpg" title="3DNews" />
                 </div>
