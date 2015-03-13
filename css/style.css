@@ -147,3 +147,7 @@ input.links-input {
     -webkit-box-sizing: border-box;
 }
 
+.edit-ico {
+	float: right;
+	cursor: pointer;
+}
