@@ -1,3 +1,6 @@
+/**
+ * New node file
+ */
 var Category = function(name) {
     this.name = name;
 };
@@ -14,3 +17,4 @@ var Article = function(topic, text) {
     this.topic = topic;
     this.text = text;
 };
+//LOL
