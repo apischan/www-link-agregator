@@ -23,22 +23,37 @@ $(document).ready(function() {
         tab_com.show();
         tab_act.hide();
     });
-
+    
+    $('#editItem').hide();
 });
 
 var divItemTemplate = '\
-        <div class="item-title">\
-            #{title}\
-            <input type="button" value="edit" onclick="" />\
+        <div class="item-title">#{title}\
+            <span class="edit-ico"><img src="img/edit.png" title="edit" /></span>\
         </div>\
         <div class="item-image">\
             <img src="#{imgUrl}" title="#{title}" />\
         </div>\
         <div class="item-link">#{itemLink}</div>';
 
-var addItem = function(link, title, imgUrl) {
+function addItem(link, title, imgUrl) {
     var actualTab = document.getElementById('tab_act');
 
+    var divItem = getDivItem(link, title, imgUrl);
+    
+    shiftItem(actualTab, divItem);
+    
+    clearInputs();
+//    removeAfterTimeout(1000*5, actualTab, divItem);
+};
+
+function clearInputs() {
+    $('.links-input').each(function() {
+        $(this).val('');
+    });
+}
+
+function getDivItem(link, title, imgUrl) {
     var divItem = document.createElement('div');
     divItem.setAttribute('class', 'item');
     
@@ -46,11 +61,9 @@ var addItem = function(link, title, imgUrl) {
                                           .replace(/#{imgUrl}/g, imgUrl)
                                           .replace(/#{itemLink}/g, link);
     divItem.innerHTML = itemStr;
-    
     addEditEvent(divItem);
-    shiftItem(actualTab, divItem);
-    removeAfterTimeout(1000*5, actualTab, divItem);
-};
+    return divItem;
+}
 
 function removeAfterTimeout(delay, actualTab, divItem) {
     func = function(actualTab, divItem) {
@@ -62,18 +75,36 @@ function removeAfterTimeout(delay, actualTab, divItem) {
 };
 
 function addEditEvent(divItem) {
-    var editButton = [].slice.call(divItem.getElementsByTagName('input'))[0];
-    editButton.addEventListener('click', function(e) {
+    var editButton = $(divItem).find('.edit-ico').on('click', function(e) {
         var targetButton = e.target;
-        var divItem = targetButton.parentNode.parentNode;
+        var divItem = $(targetButton).closest(".item");
         
-        var linkInput = document.getElementById('linkInput');
-        var titleInput = document.getElementById('titleInput');
-        var imgUrlInput = document.getElementById('imgUrlInput');
+        $('#linkInput').val(divItem.find('.item-link').text().trim());
+        $('#titleInput').val(divItem.find('.item-title').text().trim());
+        $('#imgUrlInput').val(divItem.find('.item-image').find('img').attr('src').trim());
         
+        $('#addItem').hide();
+        var editButton = $('#editItem');
+        editButton.show();
         
+        editButton.on('click', doEdit(divItem));
     });
-}
+};
+
+function doEdit(oldDivItem) {
+    return function() {
+        var link = $('#linkInput').val();
+        var title = $('#titleInput').val();
+        var imgUrl = $('#imgUrlInput').val();
+        var newDiv = $(getDivItem(link, title, imgUrl));
+        
+        oldDivItem.replaceWith(newDiv);
+        
+        $('#addItem').show();
+        $('#editItem').hide();
+        clearInputs();
+    };
+};
 
 function shiftItem(actualTab, newItem) {
     var divs = [].slice.call(actualTab.getElementsByTagName('div'));

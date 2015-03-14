@@ -38,8 +38,9 @@
         <br />
         <div class="links-link">
             <strong>></strong> <a href="{{name}}" target="_blank">{{name}}</a>
-            <br /><input type="button" value="Add" 
-            onclick="addItem(document.getElementById('link').value, document.getElementById('title').value, document.getElementById('imgUrl').value);"/>
+            <br /><input id='addItem' type="button" value="Add" 
+            onclick="addItem(document.getElementById('linkInput').value, document.getElementById('titleInput').value, document.getElementById('imgUrlInput').value);"/>
+            <input id='editItem' type="button" value="Edit" />
         </div>
     </div>
     <div class="clearfix"></div>
@@ -79,8 +80,7 @@
             </div>
 
         </div>
-        <div class="tab-completed" id="tab_com">Your history is
-            clear =]</div>
+        <div class="tab-completed" id="tab_com">Your history is clear =]</div>
 
     </div>
 </body>
