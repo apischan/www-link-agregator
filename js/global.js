@@ -25,26 +25,18 @@ $(document).ready(function() {
     });
     
     $('#editItem').hide();
+    $('#addItem').on('click', addItem);
 });
 
-var divItemTemplate = '\
-        <div class="item-title">#{title}\
-            <span class="edit-ico"><img src="img/edit.png" title="edit" /></span>\
-        </div>\
-        <div class="item-image">\
-            <img src="#{imgUrl}" title="#{title}" />\
-        </div>\
-        <div class="item-link">#{itemLink}</div>';
+var addItem = function() {
+    var actualTab = $('#tab_act');
 
-function addItem(link, title, imgUrl) {
-    var actualTab = document.getElementById('tab_act');
-
-    var divItem = getDivItem(link, title, imgUrl);
+    var divItem = getDivItem();
     
     shiftItem(actualTab, divItem);
     
     clearInputs();
-//    removeAfterTimeout(1000*5, actualTab, divItem);
+//    removeAfterTimeout(1000*5, $(divItem));
 };
 
 function clearInputs() {
@@ -53,29 +45,30 @@ function clearInputs() {
     });
 }
 
-function getDivItem(link, title, imgUrl) {
-    var divItem = document.createElement('div');
-    divItem.setAttribute('class', 'item');
+function getDivItem() {
+    var item = new Item();
+    var itemStr = item.divText();
+
+    var divItem = jQuery('<div>', {
+        'class': 'item',
+        html: itemStr
+    });
     
-    var itemStr = divItemTemplate.replace(/#{title}/g, title)
-                                          .replace(/#{imgUrl}/g, imgUrl)
-                                          .replace(/#{itemLink}/g, link);
-    divItem.innerHTML = itemStr;
     addEditEvent(divItem);
     return divItem;
 }
 
-function removeAfterTimeout(delay, actualTab, divItem) {
-    func = function(actualTab, divItem) {
+function removeAfterTimeout(delay, divItem) {
+    func = function(divItem) {
         return function() {
-            actualTab.removeChild(divItem);
+            divItem.remove();
         };
     }
-    window.setTimeout(func(actualTab, divItem), delay);
+    window.setTimeout(func(divItem), delay);
 };
 
 function addEditEvent(divItem) {
-    var editButton = $(divItem).find('.edit-ico').on('click', function(e) {
+    var editButton = divItem.find('.edit-ico').on('click', function(e) {
         var targetButton = e.target;
         var divItem = $(targetButton).closest(".item");
         
@@ -92,32 +85,28 @@ function addEditEvent(divItem) {
 };
 
 function doEdit(oldDivItem) {
-    return function() {
-        var link = $('#linkInput').val();
-        var title = $('#titleInput').val();
-        var imgUrl = $('#imgUrlInput').val();
-        var newDiv = $(getDivItem(link, title, imgUrl));
+    return function(e) {
+        var newDiv = getDivItem();
         
         oldDivItem.replaceWith(newDiv);
         
         $('#addItem').show();
         $('#editItem').hide();
         clearInputs();
+        $(e.target).off();
     };
 };
 
 function shiftItem(actualTab, newItem) {
-    var divs = [].slice.call(actualTab.getElementsByTagName('div'));
+    var divs = [].slice.call(actualTab.find('div'));
     divs = divs.filter(function(elem) {
         return elem.className === 'item';
     });
-    console.log(actualTab);
-    actualTab.insertBefore(newItem, divs[0]);
+    actualTab.prepend(newItem);
     if (divs.length === 11) {
         var shifted = divs.pop();
-        actualTab.removeChild(shifted);
+        shifted.remove();
     }
-    
 };
 
 //function validateWebLink(link) {
