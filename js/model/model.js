@@ -26,6 +26,7 @@ var Item = function() {
     this.divItemTemplate = '\
         <div class="item-title">#{title}\
             <span class="edit-ico"><img src="img/edit.png" title="edit" /></span>\
+            <span class="done-ico"><img src="img/tick.png" title="done" /></span>\
         </div>\
         <div class="item-image">\
             <img src="#{imgUrl}" title="#{title}" />\
@@ -34,7 +35,7 @@ var Item = function() {
 };
 
 Item.prototype.divText = function() {
-    return divItemTemplate.replace(/#{title}/g, this.title)
+    return this.divItemTemplate.replace(/#{title}/g, this.title)
                           .replace(/#{imgUrl}/g, this.imgUrl)
                           .replace(/#{itemLink}/g, this.link)
 };

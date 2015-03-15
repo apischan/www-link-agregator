@@ -55,6 +55,7 @@ function getDivItem() {
     });
     
     addEditEvent(divItem);
+    addDoneEvent(divItem);
     return divItem;
 }
 
@@ -81,6 +82,15 @@ function addEditEvent(divItem) {
         editButton.show();
         
         editButton.on('click', doEdit(divItem));
+    });
+};
+
+function addDoneEvent(divItem) {
+    var editButton = divItem.find('.done-ico').on('click', function(e) {
+        var targetButton = e.target;
+        var divItem = $(targetButton).closest(".item");
+        
+        divItem.detach().appendTo('.tab-completed');
     });
 };
 
