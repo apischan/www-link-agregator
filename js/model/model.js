@@ -1,6 +1,3 @@
-/**
- * New node file
- */
 var Category = function(name) {
     this.name = name;
 };
@@ -18,11 +15,10 @@ var Article = function(topic, text) {
     this.text = text;
 };
 
-var Item = function() {
-    this.link = $('#linkInput').val();
-    this.title = $('#titleInput').val();
-    this.imgUrl = $('#imgUrlInput').val();
-    console.log($('#linkInput'));
+var Item = function(link, title, imgUrl) {
+    this.link = link;
+    this.title = title;
+    this.imgUrl = imgUrl;
     this.divItemTemplate = '\
         <div class="item-title">#{title}\
             <span class="edit-ico"><img src="img/edit.png" title="edit" /></span>\
@@ -36,6 +32,6 @@ var Item = function() {
 
 Item.prototype.divText = function() {
     return this.divItemTemplate.replace(/#{title}/g, this.title)
-                          .replace(/#{imgUrl}/g, this.imgUrl)
-                          .replace(/#{itemLink}/g, this.link)
+                               .replace(/#{imgUrl}/g, this.imgUrl)
+                               .replace(/#{itemLink}/g, this.link);
 };

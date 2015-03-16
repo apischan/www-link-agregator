@@ -26,11 +26,29 @@ $(document).ready(function() {
     
     $('#editItem').hide();
     $('#addItem').on('click', addItem);
+    
+    // for dev only
+    //sessionStorage.clear();
+    if (sessionStorage.getItem('actual') == null) {
+        var initData = {
+                data: [new Item('https://www.google.com/', 'Google', 'img/temp/google.jpg'),
+                       new Item('http://www.uefa.com/', 'UEFA', 'img/temp/uefa.jpg'),
+                       new Item('http://www.3dnews.ru/', '3DNews', 'img/temp/3dnews.jpg')]};
+        sessionStorage.setItem('actual', JSON.stringify(initData));
+    }
+    
+    var data = JSON.parse(sessionStorage.getItem('actual')).data;
+    
+    for (var i in data) {
+        var item = data[i];
+        item.divText = Item.prototype.divText;
+        var newItem = getDivItem(item);
+        tab_act.prepend(newItem);
+    }
 });
 
 var addItem = function() {
     var actualTab = $('#tab_act');
-
     var divItem = getDivItem();
     
     shiftItem(actualTab, divItem);
@@ -45,8 +63,11 @@ function clearInputs() {
     });
 }
 
-function getDivItem() {
-    var item = new Item();
+function getDivItem(item) {
+    if (item == undefined) {
+        item = new Item($('#linkInput').val(), $('#titleInput').val(), $('#imgUrlInput').val());
+    }
+    
     var itemStr = item.divText();
 
     var divItem = jQuery('<div>', {
@@ -57,7 +78,7 @@ function getDivItem() {
     addEditEvent(divItem);
     addDoneEvent(divItem);
     return divItem;
-}
+};
 
 function removeAfterTimeout(delay, divItem) {
     func = function(divItem) {
