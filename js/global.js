@@ -29,22 +29,22 @@ $(document).ready(function() {
     
     // for dev only
     //sessionStorage.clear();
-    if (sessionStorage.getItem('actual') == null) {
-        var initData = {
-                data: [new Item('https://www.google.com/', 'Google', 'img/temp/google.jpg'),
-                       new Item('http://www.uefa.com/', 'UEFA', 'img/temp/uefa.jpg'),
-                       new Item('http://www.3dnews.ru/', '3DNews', 'img/temp/3dnews.jpg')]};
-        sessionStorage.setItem('actual', JSON.stringify(initData));
-    }
-    
-    var data = JSON.parse(sessionStorage.getItem('actual')).data;
-    
-    for (var i in data) {
-        var item = data[i];
-        item.divText = Item.prototype.divText;
-        var newItem = getDivItem(item);
-        tab_act.prepend(newItem);
-    }
+//    if (sessionStorage.getItem('actual') == null) {
+//        var initData = {
+//                data: [new Item('https://www.google.com/', 'Google', 'img/temp/google.jpg'),
+//                       new Item('http://www.uefa.com/', 'UEFA', 'img/temp/uefa.jpg'),
+//                       new Item('http://www.3dnews.ru/', '3DNews', 'img/temp/3dnews.jpg')]};
+//        sessionStorage.setItem('actual', JSON.stringify(initData));
+//    }
+//    
+//    var data = JSON.parse(sessionStorage.getItem('actual')).data;
+//    
+//    for (var i in data) {
+//        var item = data[i];
+//        item.divText = Item.prototype.divText;
+//        var newItem = getDivItem(item);
+//        tab_act.prepend(newItem);
+//    }
 });
 
 var addItem = function() {
