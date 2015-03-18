@@ -1,4 +1,6 @@
-$(document).ready(function() {
+"use strict";
+
+$(document).ready(function () {
     var tab_1 = $("#tab-one");
     var tab_2 = $("#tab-two");
 
@@ -8,7 +10,7 @@ $(document).ready(function() {
     tab_1.addClass("tabs-act");
     tab_com.hide();
 
-    tab_1.on("click", function() {
+    tab_1.on("click", function () {
         tab_1.addClass("tabs-act");
         tab_2.removeClass("tabs-act");
 
@@ -16,7 +18,7 @@ $(document).ready(function() {
         tab_com.hide();
     });
 
-    tab_2.on("click", function() {
+    tab_2.on("click", function () {
         tab_2.addClass("tabs-act");
         tab_1.removeClass("tabs-act");
 
@@ -24,61 +26,13 @@ $(document).ready(function() {
         tab_act.hide();
     });
     
-    $('#editItem').hide();
-    $('#addItem').on('click', addItem);
-    
-    // for dev only
-    //sessionStorage.clear();
-//    if (sessionStorage.getItem('actual') == null) {
-//        var initData = {
-//                data: [new Item('https://www.google.com/', 'Google', 'img/temp/google.jpg'),
-//                       new Item('http://www.uefa.com/', 'UEFA', 'img/temp/uefa.jpg'),
-//                       new Item('http://www.3dnews.ru/', '3DNews', 'img/temp/3dnews.jpg')]};
-//        sessionStorage.setItem('actual', JSON.stringify(initData));
-//    }
-//    
-//    var data = JSON.parse(sessionStorage.getItem('actual')).data;
-//    
-//    for (var i in data) {
-//        var item = data[i];
-//        item.divText = Item.prototype.divText;
-//        var newItem = getDivItem(item);
-//        tab_act.prepend(newItem);
-//    }
 });
-
-var addItem = function() {
-    var actualTab = $('#tab_act');
-    var divItem = getDivItem();
-    
-    shiftItem(actualTab, divItem);
-    
-    clearInputs();
-//    removeAfterTimeout(1000*5, $(divItem));
-};
 
 function clearInputs() {
     $('.links-input').each(function() {
         $(this).val('');
     });
 }
-
-function getDivItem(item) {
-    if (item == undefined) {
-        item = new Item($('#linkInput').val(), $('#titleInput').val(), $('#imgUrlInput').val());
-    }
-    
-    var itemStr = item.divText();
-
-    var divItem = jQuery('<div>', {
-        'class': 'item',
-        html: itemStr
-    });
-    
-    addEditEvent(divItem);
-    addDoneEvent(divItem);
-    return divItem;
-};
 
 function removeAfterTimeout(delay, divItem) {
     func = function(divItem) {
@@ -87,23 +41,6 @@ function removeAfterTimeout(delay, divItem) {
         };
     }
     window.setTimeout(func(divItem), delay);
-};
-
-function addEditEvent(divItem) {
-    var editButton = divItem.find('.edit-ico').on('click', function(e) {
-        var targetButton = e.target;
-        var divItem = $(targetButton).closest(".item");
-        
-        $('#linkInput').val(divItem.find('.item-link').text().trim());
-        $('#titleInput').val(divItem.find('.item-title').text().trim());
-        $('#imgUrlInput').val(divItem.find('.item-image').find('img').attr('src').trim());
-        
-        $('#addItem').hide();
-        var editButton = $('#editItem');
-        editButton.show();
-        
-        editButton.on('click', doEdit(divItem));
-    });
 };
 
 function addDoneEvent(divItem) {
@@ -139,7 +76,3 @@ function shiftItem(actualTab, newItem) {
         shifted.remove();
     }
 };
-
-//function validateWebLink(link) {
-//    '^(?:ftp|http|https):\/\/(?:[\w\.\-\+]+:{0,1}[\w\.\-\+]*@)?(?:[a-z0-9\-\.]+)(?::[0-9]+)?(?:\/|\/(?:[\w#!:\.\?\+=&%@!\-\/\(\)]+)|\?(?:[\w#!:\.\?\+=&%@!\-\/\(\)]+))?$'
-//};

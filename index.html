@@ -26,27 +26,28 @@
         <div class="left-bar-header">
             <h1>Link agregator</h1>
         </div>
-        <h2>Please, check the category*:</h2>
-        <select class="links-select">
-            <option>Sport</option>
-            <option>Hi-Tech</option>
-            <option>Movies</option>
-        </select>
-
-        <h2>And enter link*:</h2>
-        <input id='linkInput' class="links-input" type="text" value="" />
-        <input id='titleInput' class="links-input" type="text" value="" />
-        <input id='imgUrlInput' class="links-input" type="text" value="" />
-        <br />
-        <div class="links-link">
-            <strong>></strong> <a href="{{name}}" target="_blank"></a>
+        <div class="input-form">
+            <h2>Please, check the category*:</h2>
+            <select class="links-select">
+                <option ng-repeat="categoty in categories">{{categoty}}</option>
+            </select>
+            
+            <h2>And enter link*:</h2>
+            <input id='linkInput' class="links-input" type="text" ng-model="link" />
+            <input id='titleInput' class="links-input" type="text" ng-model="title" />
+            <input id='imgUrlInput' class="links-input" type="text" ng-model="image" />
             <br />
-            <input id='addItem' type="button" value="Add" />
-            <input id='editItem' type="button" value="Edit" />
+            <div class="links-link">
+                <strong>></strong> <a href="{{name}}" target="_blank"></a>
+                <br />
+                <input id='addItem' type="button" value="Add" ng-click="addItem();" ng-hide="editMode"/>
+                <input id='editItem' type="button" value="Edit" ng-click="performEdit();" ng-show="editMode" />
+            </div>
         </div>
     </div>
     <div class="clearfix"></div>
     <div class="middle">
+          
         <div class="tabs" id="tab-one">Actual</div>
         <div class="tabs" id="tab-two">Completed</div>
         <div class="clearfix"></div>
@@ -54,7 +55,7 @@
             <div class="item" ng-repeat="item in items">
                 <div class="item-title">
                     {{item.title}} <span class="edit-ico"> <img
-                        src="img/edit.png" title="edit" />
+                        src="img/edit.png" title="edit" ng-click="item.doEdit($event);" />
                     </span> <span class="done-ico"> <img
                         src="img/tick.png" title="done" />
                     </span>
