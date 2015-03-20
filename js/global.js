@@ -51,28 +51,3 @@ function addDoneEvent(divItem) {
         divItem.detach().appendTo('.tab-completed');
     });
 };
-
-function doEdit(oldDivItem) {
-    return function(e) {
-        var newDiv = getDivItem();
-        
-        oldDivItem.replaceWith(newDiv);
-        
-        $('#addItem').show();
-        $('#editItem').hide();
-        clearInputs();
-        $(e.target).off();
-    };
-};
-
-function shiftItem(actualTab, newItem) {
-    var divs = [].slice.call(actualTab.find('div'));
-    divs = divs.filter(function(elem) {
-        return elem.className === 'item';
-    });
-    actualTab.prepend(newItem);
-    if (divs.length === 11) {
-        var shifted = divs.pop();
-        shifted.remove();
-    }
-};

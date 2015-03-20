@@ -17,37 +17,50 @@ linkAggregatorControllers.controller('LinkAggregatorController', [
             sessionStorage.setItem('actual', JSON.stringify(initData));
             
             $scope.editMode = false;
+            $scope.doneItems = [];
             
             $scope.items = JSON.parse(sessionStorage.getItem('actual')).data;
             $scope.categories = [ 'Sport', 'Hi-Tech', 'Movies' ];
 
             $scope.addItem = function () {
+                var items = $scope.items;
                 var item = new Item($scope.link, $scope.title, $scope.image);
-                $scope.items.unshift(item);
+                items.unshift(item);
                 assignEditAction(item);
+                assignDoneAction(item);
+                if (items.length == 12) {
+                    items.pop();
+                }
             };
             
             $scope.performEdit = function () {
-                $scope.editMode = false;
-                
                 var editedItem = $scope.editedItem;
                 editedItem.link = $scope.link;
                 editedItem.title = $scope.title;
-                editedItem.imgUrl = $scope.imgUrl;
+                editedItem.imgUrl = $scope.image;
                 
+                $scope.editMode = false;
                 $scope.editedItem = null;
             };
             
             var assignEditAction = function (item) {
-                item.doEdit = function () {
+                item.doEdit = function (event) {
                     $scope.editMode = true;
                     
                     $scope.link = item.link;
                     $scope.title = item.title;
                     $scope.image = item.imgUrl;
+                    $scope.editedItem = item;
                 };
-                $scope.editedItem = item;
-            }
+            };
+
+            var assignDoneAction = function (item) {
+                item.doDone = function (event) {
+                    $scope.doneItems.unshift(item);
+                    $scope.items.splice($scope.items.indexOf(item), 1);
+                };
+            };
             
             $scope.items.forEach(assignEditAction);
+            $scope.items.forEach(assignDoneAction);
         }]);
