@@ -26,6 +26,18 @@ $(document).ready(function () {
         tab_act.hide();
     });
     
+	var slid = $(".slider-nav");
+	var slid_one = $("#slider-one");
+	var slid_one_nav = $("#slider-one-nav");
+	
+	slid.text("(show/hide)");
+	
+	slid_one_nav.on("click", function () {
+        slid_one.toggle( "hide", function() {
+			// Animation show\hide.
+		});
+    });
+	
 });
 
 function clearInputs() {
