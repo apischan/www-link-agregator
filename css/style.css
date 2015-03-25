@@ -111,7 +111,11 @@ input.links-input {
     border-bottom: 6px solid #ecf0f1;
 }
 
-.tabs-act {
+ul.nav {
+    list-style-type: none;
+}
+
+li.active {
     color: #7f8c8d;
     border-bottom: 6px solid #7f8c8d;
 }
