@@ -1,0 +1,13 @@
+<div class="item" ng-repeat="item in items">
+    <div class="item-title">
+        {{item.title}} <span class="edit-ico"> <img
+            src="img/edit.png" title="edit" ng-click="item.doEdit($event);" />
+        </span> <span class="done-ico"> <img
+            src="img/tick.png" title="done" ng-click="item.doDone($event)"/>
+        </span>
+    </div>
+    <div class="item-image">
+        <img src="{{item.imgUrl}}" title="{{item.title}}" />
+    </div>
+    <div class="item-link">{{item.link}}</div>
+</div>
