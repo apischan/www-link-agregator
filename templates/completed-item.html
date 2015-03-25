@@ -1,0 +1,39 @@
+    <div class="middle">
+        <div class="tabs" id="tab-one">Actual</div>
+        <div class="tabs" id="tab-two">Completed</div>
+        <div class="clearfix"></div>
+        <div class="tab_actual" id="tab_act">
+			<div class="slider-nav" id="slider-one-nav"></div>
+				<div class="slider" id="slider-one">
+					<div class="item" ng-repeat="item in items">
+						<div class="item-title">
+							{{item.title}} <span class="edit-ico"> <img
+								src="img/edit.png" title="edit" ng-click="item.doEdit($event);" />
+							</span> <span class="done-ico"> <img
+								src="img/tick.png" title="done" ng-click="item.doDone($event)"/>
+							</span>
+						</div>
+						<div class="item-image">
+							<img src="{{item.imgUrl}}" title="{{item.title}}" />
+						</div>
+						<div class="item-link">{{item.link}}</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+        </div>
+        <div class="tab-completed" id="tab_com">
+            <div class="item" ng-repeat="doneItem in doneItems">
+                <div class="item-title">
+                    {{doneItem.title}} <span class="edit-ico"> <img
+                        src="img/edit.png" title="edit" ng-click="doneItem.doEdit($event);" />
+                    </span> <span class="done-ico"> <img
+                        src="img/tick.png" title="done" ng-click="doneItem.doDone($event)"/>
+                    </span>
+                </div>
+                <div class="item-image">
+                    <img src="{{doneItem.imgUrl}}" title="{{doneItem.title}}" />
+                </div>
+                <div class="item-link">{{doneItem.link}}</div>
+            </div>
+        </div>
+    </div>

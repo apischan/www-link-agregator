@@ -169,3 +169,15 @@ li.active {
     float: right;
     cursor: pointer;
 }
+
+/* Slider nav */
+.slider-nav {
+	padding: 1%;
+	font-size: 20px;
+	background: #9E9E9E;
+	color: #FFF;
+	cursor: pointer;
+}
+.slider {
+	background: #F5F5F5;
+}
