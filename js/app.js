@@ -9,11 +9,11 @@ wwwLinkAggregator.config(['$routeProvider',
     $routeProvider.
       when('/actual', {
         templateUrl: 'templates/actual-item.html',
-        controller: 'PhoneListCtrl'
+        controller: 'LinkAggregatorController'
       }).
       when('/completed', {
-        templateUrl: 'partials/phone-detail.html',
-        controller: 'PhoneDetailCtrl'
+        templateUrl: 'templates/completed-item.html',
+        controller: 'LinkAggregatorController'
       }).
       otherwise({
         redirectTo: '/actual'

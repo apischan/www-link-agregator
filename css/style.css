@@ -170,6 +170,14 @@ li.active {
     cursor: pointer;
 }
 
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
 /* Slider nav */
 .slider-nav {
 	padding: 1%;

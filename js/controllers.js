@@ -15,10 +15,10 @@ linkAggregatorControllers.controller('LinkAggregatorController', [
                                 'img/temp/3dnews.jpg') ]
             };
             sessionStorage.setItem('actual', JSON.stringify(initData));
-            
+
             $scope.editMode = false;
             $scope.doneItems = [];
-            
+
             $scope.items = JSON.parse(sessionStorage.getItem('actual')).data;
             $scope.categories = [ 'Sport', 'Hi-Tech', 'Movies' ];
 
@@ -32,21 +32,21 @@ linkAggregatorControllers.controller('LinkAggregatorController', [
                     items.pop();
                 }
             };
-            
+
             $scope.performEdit = function () {
                 var editedItem = $scope.editedItem;
                 editedItem.link = $scope.link;
                 editedItem.title = $scope.title;
                 editedItem.imgUrl = $scope.image;
-                
+
                 $scope.editMode = false;
                 $scope.editedItem = null;
             };
-            
+
             var assignEditAction = function (item) {
                 item.doEdit = function (event) {
                     $scope.editMode = true;
-                    
+
                     $scope.link = item.link;
                     $scope.title = item.title;
                     $scope.image = item.imgUrl;
@@ -60,7 +60,11 @@ linkAggregatorControllers.controller('LinkAggregatorController', [
                     $scope.items.splice($scope.items.indexOf(item), 1);
                 };
             };
-            
+
             $scope.items.forEach(assignEditAction);
             $scope.items.forEach(assignDoneAction);
         }]);
+
+//linkAggregatorControllers.controller('inkAggregatorItemController',
+//
+//);

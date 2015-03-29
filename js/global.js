@@ -54,12 +54,3 @@ function removeAfterTimeout(delay, divItem) {
     }
     window.setTimeout(func(divItem), delay);
 };
-
-function addDoneEvent(divItem) {
-    var editButton = divItem.find('.done-ico').on('click', function(e) {
-        var targetButton = e.target;
-        var divItem = $(targetButton).closest(".item");
-        
-        divItem.detach().appendTo('.tab-completed');
-    });
-};
